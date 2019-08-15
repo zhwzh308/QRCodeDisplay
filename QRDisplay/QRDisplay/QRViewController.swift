@@ -17,9 +17,6 @@ open class QRViewController: UIViewController {
     }
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        defer {
-            delegate?.willShow(backingView)
-        }
         reloadData()
     }
     open override func viewDidAppear(_ animated: Bool) {
@@ -36,6 +33,7 @@ open class QRViewController: UIViewController {
     }
     open func reloadData() {
         if backingView.image != nil {
+            delegate?.willDisappear?(backingView)
             UIView.transition(with: backingView, duration: 0.25, options: .transitionCrossDissolve, animations: { [unowned self] in
                 self.backingView.image = nil
             }) { [weak self] _ in
@@ -48,12 +46,18 @@ open class QRViewController: UIViewController {
         }
     }
     private func emptyReload() {
+        defer {
+            delegate?.willShow(backingView)
+        }
         guard let dataSource = dataSource else { return }
         let data = dataSource.qrCodeData()
         guard let image = generateQR(data) else { return }
         UIView.transition(with: backingView, duration: 0.25, options: .transitionCrossDissolve, animations: {
             self.backingView.image = image
-        }, completion: nil)
+        }) { [weak self] _ in
+            guard let `self` = self else { return }
+            self.delegate?.didShow?(self.backingView)
+        }
     }
     private func generateQR(_ data: Data) -> UIImage? {
         //CIQRCodeGenerator

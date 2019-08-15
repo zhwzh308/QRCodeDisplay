@@ -9,6 +9,7 @@
 import QRDisplay
 import UIKit
 
+private let defaultBrightness: CGFloat = 0.3
 private let scanningBrightness: CGFloat = 0.85
 
 final class QRCodeViewController: QRViewController {
@@ -21,7 +22,7 @@ final class QRCodeViewController: QRViewController {
             reloadData()
         }
     }
-    private var previousBrightness: CGFloat = 0.3
+    private var previousBrightness = defaultBrightness
     private lazy var screen: UIScreen = .main
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,9 +41,11 @@ extension QRCodeViewController: QRViewControllerDataSource {
 extension QRCodeViewController: QRViewControllerDelegate {
     func willShow(_ contentView: UIImageView) {
         previousBrightness = screen.brightness
-        screen.brightness = scanningBrightness
+        let op = DisplayBrightnessChangeOperation(scanningBrightness)
+        OperationQueue.main.addOperation(op)
     }
     func didDisappear(_ contentView: UIImageView) {
-        screen.brightness = previousBrightness
+        let op = DisplayBrightnessChangeOperation(previousBrightness)
+        OperationQueue.main.addOperation(op)
     }
 }

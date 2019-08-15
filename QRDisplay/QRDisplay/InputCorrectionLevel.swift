@@ -23,7 +23,6 @@ import Foundation
             return "H"
         }
     }
-    
 }
 
 extension InputCorrectionLevel: CustomStringConvertible {

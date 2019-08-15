@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -20,14 +21,14 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="FUp-E3-Gal" kind="relationship" relationship="rootViewController" id="elJ-xK-gFd"/>
+                        <segue destination="n67-Gx-xGD" kind="relationship" relationship="rootViewController" id="wGN-bC-ay9"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yqT-gN-rUp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="128.98550724637681" y="782.8125"/>
         </scene>
-        <!--Host View-->
+        <!--QR Code Display-->
         <scene sceneID="nY8-qm-ISw">
             <objects>
                 <tableViewController id="FUp-E3-Gal" customClass="TableViewController" customModule="QRCodeDisplay" customModuleProvider="target" sceneMemberID="viewController">
@@ -119,11 +120,53 @@
                             <outlet property="delegate" destination="FUp-E3-Gal" id="ZKu-1i-ufK"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Host View" id="XTj-Qs-2t8"/>
+                    <navigationItem key="navigationItem" title="QR Code Display" id="XTj-Qs-2t8"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cwg-5C-anD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1655" y="783"/>
+            <point key="canvasLocation" x="2859" y="783"/>
+        </scene>
+        <!--Main View-->
+        <scene sceneID="8ZW-lJ-EqN">
+            <objects>
+                <viewController id="n67-Gx-xGD" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3gU-5O-ctD">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="kqC-Kf-SOg">
+                                <rect key="frame" x="0.0" y="140" width="414" height="722"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="tDp-pR-WVy">
+                                        <rect key="frame" x="0.0" y="337" width="414" height="48"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m7L-D3-hEs">
+                                                <rect key="frame" x="100.5" y="0.0" width="213" height="48"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                                <state key="normal" title="Show QR Button"/>
+                                                <connections>
+                                                    <segue destination="FUp-E3-Gal" kind="show" id="HjX-fu-fPJ"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ep6-GK-PdD" firstAttribute="bottom" secondItem="kqC-Kf-SOg" secondAttribute="bottom" id="4BN-x1-gyB"/>
+                            <constraint firstItem="kqC-Kf-SOg" firstAttribute="top" secondItem="ep6-GK-PdD" secondAttribute="top" id="JYq-de-kKj"/>
+                            <constraint firstItem="kqC-Kf-SOg" firstAttribute="leading" secondItem="ep6-GK-PdD" secondAttribute="leading" id="KM7-qK-Jju"/>
+                            <constraint firstItem="ep6-GK-PdD" firstAttribute="trailing" secondItem="kqC-Kf-SOg" secondAttribute="trailing" id="wIG-bf-oRI"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ep6-GK-PdD"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Main View" id="adL-j6-TTG"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AZ8-Ke-kf2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1674" y="783"/>
         </scene>
         <!--Code View Controller-->
         <scene sceneID="z1f-fX-IsC">
@@ -131,7 +174,7 @@
                 <viewController id="OjS-aP-G39" customClass="QRCodeViewController" customModule="QRCodeDisplay" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="heB-Ro-Y8x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1656" y="1480"/>
+            <point key="canvasLocation" x="3909" y="782"/>
         </scene>
     </scenes>
 </document>
