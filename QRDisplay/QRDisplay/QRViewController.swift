@@ -62,11 +62,17 @@ open class QRViewController: UIViewController {
     private func generateQR(_ data: Data) -> UIImage? {
         //CIQRCodeGenerator
         let qrCodeGenerator = QRCodeGenerator(message: data, correction: .H),
-        viewSize = view.frame.size
+        viewSize = view.frame.size,
+        scale = UIScreen.main.scale
         guard
-            let output = qrCodeGenerator.resizeTo(viewSize)
+            let output = qrCodeGenerator.resizeTo(
+                .init(
+                    width: round(viewSize.width * scale),
+                    height: round(viewSize.height * scale)
+                )
+            )
             else { return nil }
-        let uiImage = UIImage(ciImage: output)
+        let uiImage = UIImage(ciImage: output, scale: scale, orientation: .up)
         return uiImage
     }
 }
